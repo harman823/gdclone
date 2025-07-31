@@ -5,6 +5,7 @@ from services.auth_handler import register_user, login_user, verify_otp_and_crea
 from flask import request, jsonify, send_file
 from services.file_utils import BUCKET_NAME, upload_file, list_userfiles, download_file
 import io
+import os
 
 app = Flask(__name__)
 
@@ -141,6 +142,7 @@ def download_endpoint():
     except Exception as e:
         return jsonify({"error": f"Download failed: {str(e)}"}), 500
 
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 10000))  # Render sets this automatically
+app.run(host="0.0.0.0", port=port)
 
