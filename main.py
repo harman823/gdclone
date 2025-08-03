@@ -4,10 +4,12 @@ import supabase
 from services.auth_handler import register_user, login_user, verify_otp_and_create_token
 from flask import request, jsonify, send_file
 from services.file_utils import BUCKET_NAME, upload_file, list_userfiles, download_file
+from flask_cors import CORS
 import io
 import os
 
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:5173"])  # 👈 Enable CORS here
 
 @app.route("/register", methods=["POST"])
 def register():
